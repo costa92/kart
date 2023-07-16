@@ -22,13 +22,17 @@ import (
 	"kart-io/kart/internal/cmd"
 )
 
+type Config struct {
+	Server Server `json:"server,omitempty" yaml:"server" mapstructure:"server" toml:"server"`
+}
+
 type Server struct {
 	Port string `json:"port,omitempty" yaml:"port" mapstructure:"port" toml:"port"`
 }
 
 func main() {
-	config := Server{}
-	cmd.NewCommand()
+	config := Config{}
+	cmd.Execute()
 	if err := viper.Unmarshal(&config); err != nil {
 		panic(err)
 	}
