@@ -2,6 +2,8 @@ package kart_grpc
 
 import (
 	"context"
+	"fmt"
+	"kart-io/kart/internal/host"
 	"testing"
 	"time"
 )
@@ -27,5 +29,23 @@ func TestServer(t *testing.T) {
 			panic(err)
 		}
 	}()
-	time.Sleep(time.Second)
+	time.Sleep(time.Second * 10)
+	testClient(t, srv)
+	if err := srv.Stop(ctx); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func testClient(t *testing.T, srv *GrpcServer) {
+	port, ok := host.Port(srv.listener)
+	if !ok {
+		t.Fatalf("extract port error: %v", srv.listener)
+	}
+	endpoint := fmt.Sprintf("127.0.0.1:%d", port)
+	// new a gRPC client
+	conn, err := DialInsecure(context.Background(), WithEndpoint(endpoint))
+	if err != nil {
+		t.Fatal(err)
+	}
+	conn.Close()
 }
