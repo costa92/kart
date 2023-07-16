@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/wire"
 	"kart-io/kart/transports"
+	kart_grpc "kart-io/kart/transports/kart-grpc"
 	kartHttp "kart-io/kart/transports/kart-http"
 )
 
@@ -20,7 +21,6 @@ func NewConfig() *kartHttp.HttpConfig {
 		EnableMetrics: true,
 		Name:          "kart",
 	}
-
 }
 
 func NewHttpSever(config *kartHttp.HttpConfig, engine *gin.Engine) (*App, error) {
@@ -40,13 +40,19 @@ func initSever(config *kartHttp.HttpConfig, handler *gin.Engine) (*transports.Ge
 		kartHttp.WithConfig(config),
 	)
 
+	grcConfig := &kart_grpc.GrpcConfig{
+		Port: "8081",
+		Addr: "0.0.0.0",
+	}
+	grpcServer := kart_grpc.NewGrpcServer(kart_grpc.WithConfig(grcConfig))
 	// 运行 http 与 rpc
 	gs := transports.NewGenericAPIServer(
 		transports.Server(
 			httpServer,
+			grpcServer,
 		),
+		transports.Name(config.Name),
 	)
-
 	return gs, nil
 }
 
