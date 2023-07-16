@@ -40,7 +40,6 @@ func (s *Server) Setup() {
 		logger.Infow("gin endpoint setup ", "httpMethod", httpMethod, "absolutePath",
 			absolutePath, "handlerName", handlerName, "nuHandlers", nuHandlers)
 	}
-	return
 }
 
 func (s *Server) InstallMiddlewares() {

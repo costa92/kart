@@ -63,8 +63,8 @@ func NewGrpcServer(opts ...Option) *GrpcServer {
 }
 
 func (s *GrpcServer) initGrpcServer() {
-	unaryInterceptors := []grpc.UnaryServerInterceptor{}
-	streamInterceptors := []grpc.StreamServerInterceptor{}
+	var unaryInterceptors []grpc.UnaryServerInterceptor
+	var streamInterceptors []grpc.StreamServerInterceptor
 
 	if s.customInterceptorOuterMost {
 		logger.Infow("init custom interceptors to be the outer most wrapper around the real call")
@@ -201,7 +201,16 @@ func (s *GrpcServer) Start(ctx context.Context) error {
 	if _, err := s.Endpoint(); err != nil {
 		return err
 	}
-	fmt.Println("[gRPC] server started", "listen_addr", s.listener.Addr().String())
+	s.ctx = ctx
+	logger.Infow("[gRPC] server started", "listen_addr", s.listener.Addr().String())
+
+	if s.metric && s.serverMetrics != nil {
+		s.serverMetrics.InitializeMetrics(s.Server)
+		if err := s.serverMetrics.Register(prometheus.DefaultRegisterer); err != nil {
+			logger.Errorw("[gRPC] server register prometheus metrics failed", "err", err)
+		}
+	}
+
 	s.health.Resume()
 	return s.Server.Serve(s.listener)
 }

@@ -6,6 +6,8 @@ import (
 	"testing"
 )
 
+type testKey struct{}
+
 func Test_GinNewServer(t *testing.T) {
 	handler := gin.Default()
 	config := &HttpConfig{
@@ -20,7 +22,7 @@ func Test_GinNewServer(t *testing.T) {
 	if src == nil {
 		t.Error("Server is nil")
 	}
-	ctx := context.WithValue(context.Background(), "test", "test")
+	ctx := context.WithValue(context.Background(), testKey{}, "test")
 	if err := src.Start(ctx); err != nil {
 		t.Error(err)
 	}
