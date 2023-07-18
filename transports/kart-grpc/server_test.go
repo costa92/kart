@@ -3,9 +3,10 @@ package kart_grpc
 import (
 	"context"
 	"fmt"
-	"kart-io/kart/internal/host"
 	"testing"
 	"time"
+
+	"kart-io/kart/internal/host"
 )
 
 type testKey struct{}

@@ -2,15 +2,17 @@ package transports
 
 import (
 	"context"
-	"github.com/costa92/errors"
-	"github.com/costa92/logger"
-	"github.com/segmentio/ksuid"
-	"go.uber.org/automaxprocs/maxprocs"
-	"golang.org/x/sync/errgroup"
 	"os"
 	"os/signal"
 	"sync"
 	"syscall"
+
+	"github.com/segmentio/ksuid"
+	"go.uber.org/automaxprocs/maxprocs"
+	"golang.org/x/sync/errgroup"
+
+	"github.com/costa92/errors"
+	"github.com/costa92/logger"
 )
 
 // ID returns app instance id.

@@ -6,5 +6,4 @@ type AppInfo interface {
 	Version() string
 }
 
-type App struct {
-}
+type App struct{}

@@ -3,7 +3,11 @@ package kart_grpc
 import (
 	"context"
 	"fmt"
-	"github.com/costa92/logger"
+	"net"
+	"net/url"
+	"sync"
+	"time"
+
 	openmetrics "github.com/grpc-ecosystem/go-grpc-middleware/providers/openmetrics/v2"
 	grpczap "github.com/grpc-ecosystem/go-grpc-middleware/providers/zap/v2"
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/logging"
@@ -17,10 +21,8 @@ import (
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/reflection"
 	"kart-io/kart/internal/host"
-	"net"
-	"net/url"
-	"sync"
-	"time"
+
+	"github.com/costa92/logger"
 )
 
 const HEALTHCHECK_SERVICE = "grpc.health.v1.Health"

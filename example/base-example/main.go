@@ -3,10 +3,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
@@ -23,5 +24,4 @@ func main() {
 	}
 	fmt.Println("Server exiting")
 	<-chSig
-
 }
