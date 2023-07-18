@@ -35,8 +35,9 @@ var rootCmd = &cobra.Command{
 	Long:               `kart 框架提供的命令行工具，使用这个命令行工具能很方便执行框架自带命令，也能很方便编写业务命令`,
 	DisableSuggestions: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		cmd.InitDefaultHelpFlag()
-		return cmd.Help()
+		//  cmd.InitDefaultHelpFlag()
+		//  return cmd.Help()
+		return nil
 	},
 	// 不需要出现cobra默认的completion子命令
 	CompletionOptions: cobra.CompletionOptions{DisableDefaultCmd: true},

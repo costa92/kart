@@ -18,6 +18,7 @@ package cmd
 import (
 	"fmt"
 	"github.com/fatih/color"
+	"os"
 	"strings"
 
 	"github.com/spf13/cobra"
@@ -57,5 +58,6 @@ Simply type kart help [path to command] for full details.`,
 			cmd.InitDefaultHelpFlag() // make possible 'help' flag to be shown
 			_ = cmd.Help()
 		}
+		os.Exit(1)
 	},
 }
