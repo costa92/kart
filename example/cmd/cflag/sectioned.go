@@ -1,8 +1,4 @@
-// Copyright 2020 Lingfei Kong <colin404@foxmail.com>. All rights reserved.
-// Use of this source code is governed by a MIT style
-// license that can be found in the LICENSE file.
-
-package cmd
+package cflag
 
 import (
 	"bytes"
@@ -42,13 +38,16 @@ func PrintSections(w io.Writer, fss NamedFlagSets, cols int) {
 		if !fs.HasFlags() {
 			continue
 		}
+
 		wideFS := pflag.NewFlagSet("", pflag.ExitOnError)
 		wideFS.AddFlagSet(fs)
+
 		var zzz string
 		if cols > 24 {
 			zzz = strings.Repeat("z", cols-24)
 			wideFS.Int(zzz, 0, strings.Repeat("z", cols-24))
 		}
+
 		var buf bytes.Buffer
 		fmt.Fprintf(&buf, "\n%s flags:\n\n%s", strings.ToUpper(name[:1])+name[1:], wideFS.FlagUsagesWrapped(cols))
 

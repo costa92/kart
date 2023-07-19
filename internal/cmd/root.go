@@ -18,6 +18,8 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 	"os"
+	"runtime"
+	"strings"
 )
 
 var cfgFile string
@@ -29,8 +31,6 @@ var rootCmd = &cobra.Command{
 	Long:               `kart 框架提供的命令行工具，使用这个命令行工具能很方便执行框架自带命令，也能很方便编写业务命令`,
 	DisableSuggestions: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		//  cmd.InitDefaultHelpFlag()
-		//  return cmd.Help()
 		return nil
 	},
 	// 不需要出现cobra默认的completion子命令
@@ -38,13 +38,12 @@ var rootCmd = &cobra.Command{
 }
 
 func addConfigFlag() {
-	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", "config file (default is $HOME/.config.yaml | config.yaml)")
 	cobra.OnInitialize(initConfig)
+	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", "config file (default is $HOME/.config.yaml | config.yaml)")
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-	rootCmd.AddCommand(serverCmd)
 }
 
-func BuildCommand(noConfig bool) {
+func BuildCommand(noConfig bool) *cobra.Command {
 	// cmd.SetUsageTemplate(usageTemplate)
 	rootCmd.SetOut(os.Stdout)
 	rootCmd.SetErr(os.Stderr)
@@ -54,7 +53,19 @@ func BuildCommand(noConfig bool) {
 	if !noConfig { // 是否配置文件
 		addConfigFlag()
 	}
-	if err := rootCmd.Execute(); err != nil {
-		os.Exit(1)
+	rootCmd.AddCommand(serverCmd)
+	rootCmd.AddCommand(helpCommand(FormatBaseName("kart")))
+
+	return rootCmd
+}
+
+// FormatBaseName is formatted as an executable file name under different
+// operating systems according to the given name.
+func FormatBaseName(basename string) string {
+	// Make case-insensitive and strip executable suffix if present
+	if runtime.GOOS == "windows" {
+		basename = strings.ToLower(basename)
+		basename = strings.TrimSuffix(basename, ".exe")
 	}
+	return basename
 }

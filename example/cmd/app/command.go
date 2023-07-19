@@ -1,10 +1,12 @@
-package cmd
+package app
 
 import (
 	"fmt"
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 	"os"
+	"runtime"
+	"strings"
 )
 
 type Command struct {
@@ -15,18 +17,22 @@ type Command struct {
 	runFunc  RunCommandFunc
 }
 
-type CommandOption func(*Command)
+// CommandOption defines optional parameters for initializing the command
+// structure.
+type CommandOption func(c *Command)
 
-func WithCommandOptions(opt CliOptions) CommandOption {
+// WithCommandOptions sets the command options.
+func WithCommandOptions(opts CliOptions) CommandOption {
 	return func(c *Command) {
-		c.options = opt
+		c.options = opts
 	}
 }
 
+// RunCommandFunc defines the application's command startup callback function.
 type RunCommandFunc func(args []string) error
 
-// WithRunCommandFunc function option.
-func WithRunCommandFunc(run RunCommandFunc) CommandOption {
+// WithCommandRunFunc sets the command run function.
+func WithCommandRunFunc(run RunCommandFunc) CommandOption {
 	return func(c *Command) {
 		c.runFunc = run
 	}
@@ -53,10 +59,11 @@ func (c *Command) AddCommands(cmds ...*Command) {
 
 func (c *Command) CobraCommand() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:  c.usage,
-		Long: c.desc,
+		Use:   c.usage,
+		Short: c.desc,
 	}
 	cmd.SetOut(os.Stdout)
+	cmd.SetErr(os.Stdout)
 	cmd.Flags().SortFlags = false
 	if len(c.commands) > 0 {
 		for _, command := range c.commands {
@@ -70,7 +77,6 @@ func (c *Command) CobraCommand() *cobra.Command {
 		for _, f := range c.options.Flags().FlagSets {
 			cmd.Flags().AddFlagSet(f)
 		}
-		// c.options.AddFlags(cmd.Flags())
 	}
 	addHelpCommandFlag(c.usage, cmd.Flags())
 	return cmd
@@ -83,4 +89,16 @@ func (c *Command) runCommand(cmd *cobra.Command, args []string) {
 			os.Exit(1)
 		}
 	}
+}
+
+// FormatBaseName is formatted as an executable file name under different
+// operating systems according to the given name.
+func FormatBaseName(basename string) string {
+	// Make case-insensitive and strip executable suffix if present
+	if runtime.GOOS == "windows" {
+		basename = strings.ToLower(basename)
+		basename = strings.TrimSuffix(basename, ".exe")
+	}
+
+	return basename
 }

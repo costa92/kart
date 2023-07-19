@@ -5,8 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f5dce38-0712-4ad4-a10e-652bf79645e4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/example/cmd/app/command.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/cmd/app/command_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/cmd/app/flag.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/cmd/app/help.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/cmd/app/options.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/cmd/cflag/sectioned.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/cmd/config/config.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/cmd/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/cmd/pkg/app.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/cmd/pkg/option.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/cmd/flags.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/command/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/command/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/cmd/cmd.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/cmd/cmd.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/cmd/root.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/cmd/root.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/cmd/sectioned.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/cmd/sectioned.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,15 +44,17 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "DefaultGoTemplateProperty": "Go File"
+    "DefaultGoTemplateProperty": "Go File",
+    "last_opened_file_path": "/home/hellotalk/code/go/src/github.com/marmotedu/iam"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/example/cmd/pkg" />
       <recent name="$PROJECT_DIR$/internal/cmd" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Go Test.Test_CobraCommand in kart-io/kart/example/cmd/app">
     <configuration name="go build kart-io/kart/example/command" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="kart" />
       <working_directory value="$PROJECT_DIR$" />
@@ -48,8 +64,21 @@
       <filePath value="$PROJECT_DIR$/example/command/main.go" />
       <method v="2" />
     </configuration>
+    <configuration name="Test_CobraCommand in kart-io/kart/example/cmd/app" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="kart" />
+      <working_directory value="$PROJECT_DIR$/example/cmd/app" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="kart-io/kart/example/cmd/app" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTest_CobraCommand\E$" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.Test_CobraCommand in kart-io/kart/example/cmd/app" />
         <item itemvalue="Go Build.go build kart-io/kart/example/command" />
       </list>
     </recent_temporary>
@@ -59,7 +88,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/internal/cmd/cmd.go</url>
-          <line>86</line>
+          <line>85</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>

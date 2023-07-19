@@ -26,6 +26,14 @@ type Server struct {
 	Port string `json:"port,omitempty" yaml:"port" mapstructure:"port" toml:"port"`
 }
 
+type App struct {
+	Commands []*cmd.Command
+}
+
 func main() {
-	cmd.BuildCommand(true)
+	cmdRoot := cmd.BuildCommand(true)
+	err := cmdRoot.Execute()
+	if err != nil {
+		return
+	}
 }
