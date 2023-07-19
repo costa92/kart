@@ -11,7 +11,7 @@ for the api objects which include users, policies, secrets, and
 others. The API Server services REST operations to do the api objects management.
 
 Find more iam-apiserver information at:
-    https://github.com/marmotedu/iam/blob/master/docs/guide/en-US/cmd/iam-apiserver.md`
+    https://github.com/costa92/kart`
 
 func main() {
 	opts := pkg.NewOptions()
@@ -30,8 +30,11 @@ func run(opts *pkg.Options) pkg.RunFunc {
 		if err != nil {
 			return err
 		}
-		fmt.Println("config", cfg)
-		return nil
-		//return Run(cfg)
+		return Run(cfg)
 	}
+}
+
+func Run(config *config.Config) error {
+	fmt.Println(config)
+	return nil
 }
