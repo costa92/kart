@@ -15,12 +15,7 @@ limitations under the License.
 */
 package main
 
-import (
-	"fmt"
-
-	"github.com/spf13/viper"
-	"kart-io/kart/internal/cmd"
-)
+import "kart-io/kart/internal/cmd"
 
 type Config struct {
 	Server Server `json:"server,omitempty" yaml:"server" mapstructure:"server" toml:"server"`
@@ -31,10 +26,5 @@ type Server struct {
 }
 
 func main() {
-	config := Config{}
-	cmd.Execute()
-	if err := viper.Unmarshal(&config); err != nil {
-		panic(err)
-	}
-	fmt.Println(config)
+	cmd.BuildCommand(true)
 }

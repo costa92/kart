@@ -16,14 +16,8 @@ limitations under the License.
 package cmd
 
 import (
-	"fmt"
-	"github.com/costa92/logger"
-	"github.com/mitchellh/go-homedir"
-	"github.com/spf13/viper"
-	"os"
-
-	"github.com/fatih/color"
 	"github.com/spf13/cobra"
+	"os"
 )
 
 var cfgFile string
@@ -43,35 +37,24 @@ var rootCmd = &cobra.Command{
 	CompletionOptions: cobra.CompletionOptions{DisableDefaultCmd: true},
 }
 
-// Execute adds all child commands to the root command and sets flags appropriately.
-// This is called by main.main(). It only needs to happen once to the rootCmd.
-func Execute() {
-	if err := rootCmd.Execute(); err != nil {
-		fmt.Printf("%v %v\n", color.RedString("Error:"), err)
-		os.Exit(1)
-	}
+func addConfigFlag() {
+	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", "config file (default is $HOME/.config.yaml | config.yaml)")
+	cobra.OnInitialize(initConfig)
+	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	rootCmd.AddCommand(serverCmd)
 }
 
-func init() {
-	cobra.OnInitialize(func() {
-		if cfgFile != "" {
-			viper.SetConfigFile(cfgFile)
-			viper.SetConfigType("yaml")
-		} else {
-			viper.SetConfigType("yaml")
-			home, err := homedir.Dir()
-			cobra.CheckErr(err)
-			viper.AddConfigPath(home)
-			viper.SetConfigName("config")
-		}
-		viper.AutomaticEnv()
-		if err := viper.ReadInConfig(); err != nil {
-			logger.Errorw("Using config file", "file", viper.ConfigFileUsed(), "err", err)
-			os.Exit(1)
-		}
-	})
-	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", "config file (default is $HOME/.config.yaml | config.yaml)")
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-	rootCmd.AddCommand(helpCmd)
-	rootCmd.AddCommand(serveCmd)
+func BuildCommand(noConfig bool) {
+	// cmd.SetUsageTemplate(usageTemplate)
+	rootCmd.SetOut(os.Stdout)
+	rootCmd.SetErr(os.Stderr)
+	rootCmd.Flags().SortFlags = true
+	InitFlags(rootCmd.Flags())
+	if !noConfig {
+		addConfigFlag()
+	}
+
+	if err := rootCmd.Execute(); err != nil {
+		os.Exit(1)
+	}
 }

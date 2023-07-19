@@ -15,7 +15,29 @@ limitations under the License.
 */
 package cmd
 
+import (
+	"github.com/costa92/logger"
+	"github.com/mitchellh/go-homedir"
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
+	"os"
+)
+
 // initConfig reads in config file and ENV variables if set.
 func initConfig() {
-
+	if cfgFile != "" {
+		viper.SetConfigFile(cfgFile)
+		viper.SetConfigType("yaml")
+	} else {
+		viper.SetConfigType("yaml")
+		home, err := homedir.Dir()
+		cobra.CheckErr(err)
+		viper.AddConfigPath(home)
+		viper.SetConfigName("config")
+	}
+	viper.AutomaticEnv()
+	if err := viper.ReadInConfig(); err != nil {
+		logger.Errorw("Using config file", "file", viper.ConfigFileUsed(), "err", err)
+		os.Exit(1)
+	}
 }
