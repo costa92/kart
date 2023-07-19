@@ -50,10 +50,10 @@ func BuildCommand(noConfig bool) {
 	rootCmd.SetErr(os.Stderr)
 	rootCmd.Flags().SortFlags = true
 	InitFlags(rootCmd.Flags())
-	if !noConfig {
+
+	if !noConfig { // 是否配置文件
 		addConfigFlag()
 	}
-
 	if err := rootCmd.Execute(); err != nil {
 		os.Exit(1)
 	}
