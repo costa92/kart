@@ -1,10 +1,11 @@
-package app
+package command
 
 import (
 	goflag "flag"
 	"fmt"
-	"github.com/spf13/pflag"
 	"strings"
+
+	"github.com/spf13/pflag"
 )
 
 // WordSepNormalizeFunc changes all flags that contain "_" separators.

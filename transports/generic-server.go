@@ -10,6 +10,7 @@ import (
 	"github.com/segmentio/ksuid"
 	"go.uber.org/automaxprocs/maxprocs"
 	"golang.org/x/sync/errgroup"
+	"kart-io/kart"
 
 	"github.com/costa92/errors"
 	"github.com/costa92/logger"
@@ -103,12 +104,12 @@ func (gs *GenericAPIServer) Stop() error {
 type appKey struct{}
 
 // NewContext returns a new Context that carries value.
-func NewContext(ctx context.Context, s AppInfo) context.Context {
+func NewContext(ctx context.Context, s kart.AppInfo) context.Context {
 	return context.WithValue(ctx, appKey{}, s)
 }
 
 // FromContext returns the Transport value stored in ctx, if any.
-func FromContext(ctx context.Context) (s AppInfo, ok bool) {
-	s, ok = ctx.Value(appKey{}).(AppInfo)
+func FromContext(ctx context.Context) (s kart.AppInfo, ok bool) {
+	s, ok = ctx.Value(appKey{}).(kart.AppInfo)
 	return
 }

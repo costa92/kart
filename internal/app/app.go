@@ -1,21 +1,22 @@
-package pkg
+package app
 
 import (
 	"fmt"
+	"os"
+
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"kart-io/kart/example/cmd/app"
-	"kart-io/kart/example/cmd/cflag"
-	"os"
+	"kart-io/kart/internal/command"
+	"kart-io/kart/pkg/cliflag"
 )
 
 type App struct {
 	basename    string
-	options     app.CliOptions
+	options     command.CliOptions
 	runFunc     RunFunc
 	description string
-	commands    []*app.Command
+	commands    []*command.Command
 	cmd         *cobra.Command
 	noConfig    bool
 }
@@ -25,7 +26,7 @@ type App struct {
 type Option func(*App)
 
 // WithOptions returns a function that calls each Option in Options
-func WithOptions(opt app.CliOptions) Option {
+func WithOptions(opt command.CliOptions) Option {
 	return func(a *App) {
 		a.options = opt
 	}
@@ -67,7 +68,7 @@ func NewApp(basename string, opts ...Option) *App {
 
 func (a *App) buildCommand() {
 	cmd := cobra.Command{
-		Use:           app.FormatBaseName(a.basename),
+		Use:           command.FormatBaseName(a.basename),
 		Short:         "kart",
 		Long:          a.description,
 		SilenceUsage:  true,
@@ -78,13 +79,13 @@ func (a *App) buildCommand() {
 	cmd.SetOut(os.Stdout)
 	cmd.SetErr(os.Stderr)
 	cmd.Flags().SortFlags = true
-	app.InitFlags(cmd.Flags())
+	command.InitFlags(cmd.Flags())
 
 	if len(a.commands) > 0 {
-		for _, command := range a.commands {
-			cmd.AddCommand(command.CobraCommand())
+		for _, c := range a.commands {
+			cmd.AddCommand(c.CobraCommand())
 		}
-		cmd.SetHelpCommand(app.HelpCommand(app.FormatBaseName(a.basename)))
+		cmd.SetHelpCommand(command.HelpCommand(command.FormatBaseName(a.basename)))
 	}
 
 	if a.runFunc != nil {
@@ -95,7 +96,7 @@ func (a *App) buildCommand() {
 }
 
 func (a *App) runCommand(cmd *cobra.Command, args []string) error {
-	app.PrintFlags(cmd.Flags())
+	command.PrintFlags(cmd.Flags())
 	if !a.noConfig {
 		if err := viper.BindPFlags(cmd.Flags()); err != nil {
 			return err
@@ -104,7 +105,7 @@ func (a *App) runCommand(cmd *cobra.Command, args []string) error {
 			return err
 		}
 	}
-	var namedFlagSets cflag.NamedFlagSets
+	var namedFlagSets cliflag.NamedFlagSets
 	if a.options != nil {
 		namedFlagSets = a.options.Flags()
 		fs := cmd.Flags()

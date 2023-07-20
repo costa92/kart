@@ -15,8 +15,12 @@ limitations under the License.
 */
 package main
 
-// https://github.com/marmotedu/iam/blob/master/pkg/app/app.go
-import "kart-io/kart/internal/cmd"
+import (
+	"fmt"
+
+	"kart-io/kart/internal/app"
+	"kart-io/kart/internal/config"
+)
 
 type Config struct {
 	Server Server `json:"server,omitempty" yaml:"server" mapstructure:"server" toml:"server"`
@@ -26,14 +30,37 @@ type Server struct {
 	Port string `json:"port,omitempty" yaml:"port" mapstructure:"port" toml:"port"`
 }
 
-type App struct {
-	Commands []*cmd.Command
-}
+const commandDesc = `The Kart API server validates and configures data
+for the api objects which include users, policies, secrets, and
+others. The API Server services REST operations to do the api objects management.
+
+Find more iam-apiserver information at:
+    https://github.com/costa92/kart`
 
 func main() {
-	cmdRoot := cmd.BuildCommand(true)
-	err := cmdRoot.Execute()
-	if err != nil {
-		return
+	opts := app.NewOptions()
+	a := app.NewApp(
+		"kart",
+		app.WithOptions(opts),
+		app.WithDescription(commandDesc),
+		app.WithRunFunc(run(opts)),
+	)
+	a.Run()
+}
+
+func run(opts *app.Options) app.RunFunc {
+	return func(basename string) error {
+		fmt.Println(basename)
+		cfg, err := config.CreateConfigFromOptions(opts)
+		fmt.Println(cfg)
+		if err != nil {
+			return err
+		}
+		return Run(cfg)
 	}
+}
+
+func Run(config *config.Config) error {
+	fmt.Println(config)
+	return nil
 }

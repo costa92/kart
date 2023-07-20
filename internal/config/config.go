@@ -1,13 +1,15 @@
 package config
 
-import "kart-io/kart/example/cmd/pkg"
+import (
+	"kart-io/kart/internal/app"
+)
 
 type Config struct {
-	*pkg.Options
+	*app.Options
 }
 
 // CreateConfigFromOptions creates a running configuration instance based
 // on a given IAM pump command line or configuration file option.
-func CreateConfigFromOptions(opts *pkg.Options) (*Config, error) {
+func CreateConfigFromOptions(opts *app.Options) (*Config, error) {
 	return &Config{opts}, nil
 }
