@@ -5,5 +5,3 @@ type AppInfo interface {
 	Name() string
 	Version() string
 }
-
-type App struct{}

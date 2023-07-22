@@ -2,15 +2,20 @@ package options
 
 import (
 	"kart-io/kart/pkg/cliflag"
+	"kart-io/kart/transports/options"
 )
 
 type Options struct {
-	ServerRunOption *ServerRunOption `json:"server"  mapstructure:"server"`
+	ServerRunOption        *options.ServerRunOption        `json:"server"  mapstructure:"server"`
+	InsecureServingOptions *options.InsecureServingOptions `json:"insecure"  mapstructure:"insecure"`
+	FeatureOptions         *options.FeatureOptions         `json:"feature"  mapstructure:"feature"`
 }
 
 func NewOptions() *Options {
 	o := Options{
-		ServerRunOption: NewServerRunOption(),
+		ServerRunOption:        options.NewServerRunOption(),
+		InsecureServingOptions: options.NewInsecureServingOptions(),
+		FeatureOptions:         options.NewFeatureOptions(),
 	}
 	return &o
 }

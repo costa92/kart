@@ -7,12 +7,13 @@ require (
 	github.com/costa92/logger v0.0.2
 	github.com/fatih/color v1.13.0
 	github.com/gin-contrib/cors v1.4.0
+	github.com/gin-contrib/pprof v1.4.0
 	github.com/gin-gonic/gin v1.9.1
 	github.com/google/wire v0.5.0
 	github.com/grpc-ecosystem/go-grpc-middleware/providers/openmetrics/v2 v2.0.0-20210817165541-f8899ff9df52
 	github.com/grpc-ecosystem/go-grpc-middleware/providers/zap/v2 v2.0.0-20210817165541-f8899ff9df52
 	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.0.0-rc.2.0.20220714234348-5d0f5fedefc0
-	github.com/mitchellh/go-homedir v1.1.0
+	github.com/marmotedu/component-base v1.6.2
 	github.com/prometheus/client_golang v1.16.0
 	github.com/segmentio/ksuid v1.0.4
 	github.com/spf13/cobra v1.7.0

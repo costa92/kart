@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 	ginprometheus "github.com/zsais/go-gin-prometheus"
 	"kart-io/kart/transports/kart-http/middlewares"
@@ -16,9 +17,13 @@ import (
 )
 
 type Server struct {
-	Config     *HttpConfig
-	GinEngin   *gin.Engine
-	httpServer *http.Server
+	Config          *HttpConfig
+	GinEngin        *gin.Engine
+	httpServer      *http.Server
+	middlewares     []string
+	healthz         bool
+	enableMetrics   bool
+	enableProfiling bool
 }
 
 func NewServer(opts ...Option) *Server {
@@ -26,11 +31,11 @@ func NewServer(opts ...Option) *Server {
 	for _, o := range opts {
 		o(srv)
 	}
-	srv.initAPIServer()
+	initAPIServer(srv)
 	return srv
 }
 
-func (s *Server) initAPIServer() {
+func initAPIServer(s *Server) {
 	s.Setup()
 	s.InstallMiddlewares()
 	s.InstallAPIs()
@@ -45,6 +50,9 @@ func (s *Server) Setup() {
 }
 
 func (s *Server) InstallMiddlewares() {
+	if s.Config == nil {
+		return
+	}
 	for _, m := range s.Config.Middlewares {
 		mw, ok := middlewares.Middlewares[m]
 		if !ok {
@@ -56,16 +64,20 @@ func (s *Server) InstallMiddlewares() {
 
 func (s *Server) InstallAPIs() {
 	// Healthz 检测健康
-	if s.Config.Healthz {
+	if s.healthz {
 		s.GinEngin.GET("/healthz", func(ctx *gin.Context) {
 			ctx.JSON(http.StatusOK, http.StatusText(http.StatusOK))
 		})
 	}
-
 	// install metric handler
-	if s.Config.EnableMetrics {
+	if s.enableMetrics {
 		prometheus := ginprometheus.NewPrometheus("gin")
 		prometheus.Use(s.GinEngin)
+	}
+
+	// install pprof handler
+	if s.enableProfiling {
+		pprof.Register(s.GinEngin)
 	}
 }
 
@@ -77,7 +89,7 @@ func (s *Server) Start(ctx context.Context) error {
 	}()
 	serverConfig := s.Config
 	s.httpServer = &http.Server{
-		Addr:           fmt.Sprintf(":%s", serverConfig.Port),
+		Addr:           fmt.Sprintf(":%d", serverConfig.Port),
 		Handler:        s.GinEngin,
 		ReadTimeout:    time.Duration(serverConfig.ReadTimeout) * time.Second,
 		WriteTimeout:   time.Duration(serverConfig.WriteTimeout) * time.Second,

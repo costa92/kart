@@ -18,8 +18,9 @@ package main
 import (
 	"fmt"
 
-	"kart-io/kart/internal/app"
+	"kart-io/kart/internal/command"
 	"kart-io/kart/internal/config"
+	"kart-io/kart/pkg/app"
 )
 
 type Config struct {
@@ -39,20 +40,18 @@ Find more iam-apiserver information at:
 
 func main() {
 	opts := app.NewOptions()
-	a := app.NewApp(
+	a := command.NewApp(
 		"kart",
-		app.WithOptions(opts),
-		app.WithDescription(commandDesc),
-		app.WithRunFunc(run(opts)),
+		command.WithOptions(opts),
+		command.WithDescription(commandDesc),
+		command.WithRunFunc(run(opts)),
 	)
 	a.Run()
 }
 
-func run(opts *app.Options) app.RunFunc {
+func run(opts *app.Options) command.RunFunc {
 	return func(basename string) error {
-		fmt.Println(basename)
 		cfg, err := config.CreateConfigFromOptions(opts)
-		fmt.Println(cfg)
 		if err != nil {
 			return err
 		}

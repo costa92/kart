@@ -58,7 +58,7 @@ func (c *Command) AddCommands(cmds ...*Command) {
 	c.commands = append(c.commands, cmds...)
 }
 
-func (c *Command) CobraCommand() *cobra.Command {
+func (c *Command) cobraCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   c.usage,
 		Short: c.desc,
@@ -68,7 +68,7 @@ func (c *Command) CobraCommand() *cobra.Command {
 	cmd.Flags().SortFlags = false
 	if len(c.commands) > 0 {
 		for _, command := range c.commands {
-			cmd.AddCommand(command.CobraCommand())
+			cmd.AddCommand(command.cobraCommand())
 		}
 	}
 	if c.runFunc != nil {

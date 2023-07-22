@@ -1,4 +1,0 @@
-server:
-  name: kart
-  mode: debug
-  healthz: true

@@ -12,7 +12,7 @@ type testKey struct{}
 func Test_GinNewServer(t *testing.T) {
 	handler := gin.Default()
 	config := &HttpConfig{
-		Port:          "8080",
+		Port:          8080,
 		Healthz:       true,
 		EnableMetrics: true,
 	}

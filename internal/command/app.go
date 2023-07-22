@@ -1,22 +1,24 @@
-package app
+package command
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"kart-io/kart/internal/command"
 	"kart-io/kart/pkg/cliflag"
+
+	"github.com/costa92/logger"
 )
+
+var progressMessage = color.GreenString("==>")
 
 type App struct {
 	basename    string
-	options     command.CliOptions
+	options     CliOptions
 	runFunc     RunFunc
 	description string
-	commands    []*command.Command
+	commands    []*Command
 	cmd         *cobra.Command
 	noConfig    bool
 }
@@ -26,7 +28,7 @@ type App struct {
 type Option func(*App)
 
 // WithOptions returns a function that calls each Option in Options
-func WithOptions(opt command.CliOptions) Option {
+func WithOptions(opt CliOptions) Option {
 	return func(a *App) {
 		a.options = opt
 	}
@@ -68,7 +70,7 @@ func NewApp(basename string, opts ...Option) *App {
 
 func (a *App) buildCommand() {
 	cmd := cobra.Command{
-		Use:           command.FormatBaseName(a.basename),
+		Use:           FormatBaseName(a.basename),
 		Short:         "kart",
 		Long:          a.description,
 		SilenceUsage:  true,
@@ -79,31 +81,17 @@ func (a *App) buildCommand() {
 	cmd.SetOut(os.Stdout)
 	cmd.SetErr(os.Stderr)
 	cmd.Flags().SortFlags = true
-	command.InitFlags(cmd.Flags())
+	InitFlags(cmd.Flags())
 
 	if len(a.commands) > 0 {
 		for _, c := range a.commands {
-			cmd.AddCommand(c.CobraCommand())
+			cmd.AddCommand(c.cobraCommand())
 		}
-		cmd.SetHelpCommand(command.HelpCommand(command.FormatBaseName(a.basename)))
+		cmd.SetHelpCommand(HelpCommand(FormatBaseName(a.basename)))
 	}
 
 	if a.runFunc != nil {
 		cmd.RunE = a.runCommand
-	}
-
-	a.cmd = &cmd
-}
-
-func (a *App) runCommand(cmd *cobra.Command, args []string) error {
-	command.PrintFlags(cmd.Flags())
-	if !a.noConfig {
-		if err := viper.BindPFlags(cmd.Flags()); err != nil {
-			return err
-		}
-		if err := viper.Unmarshal(a.options); err != nil {
-			return err
-		}
 	}
 	var namedFlagSets cliflag.NamedFlagSets
 	if a.options != nil {
@@ -111,6 +99,24 @@ func (a *App) runCommand(cmd *cobra.Command, args []string) error {
 		fs := cmd.Flags()
 		for _, f := range namedFlagSets.FlagSets {
 			fs.AddFlagSet(f)
+		}
+	}
+	if !a.noConfig {
+		addConfigFlag(a.basename, namedFlagSets.FlagSet("global"))
+	}
+	a.cmd = &cmd
+}
+
+func (a *App) runCommand(cmd *cobra.Command, args []string) error {
+	printWorkingDir()
+	PrintFlags(cmd.Flags())
+	// 获取配置文件
+	if !a.noConfig {
+		if err := viper.BindPFlags(cmd.Flags()); err != nil {
+			return err
+		}
+		if err := viper.Unmarshal(a.options); err != nil {
+			return err
 		}
 	}
 	// run application
@@ -123,7 +129,12 @@ func (a *App) runCommand(cmd *cobra.Command, args []string) error {
 // Run is used to launch the application.
 func (a *App) Run() {
 	if err := a.cmd.Execute(); err != nil {
-		fmt.Printf("%v %v\n", color.RedString("Error:"), err)
+		logger.Infof("%v %v\n", color.RedString("Error:"), err)
 		os.Exit(1)
 	}
+}
+
+func printWorkingDir() {
+	wd, _ := os.Getwd()
+	logger.Infof("%v WorkingDir: %s", progressMessage, wd)
 }

@@ -17,3 +17,27 @@ func WithGinEngin(engin *gin.Engine) Option {
 		s.GinEngin = engin
 	}
 }
+
+func WithMiddlewares(middlewares []string) Option {
+	return func(s *Server) {
+		s.middlewares = middlewares
+	}
+}
+
+func WithHealthz(healthz bool) Option {
+	return func(s *Server) {
+		s.healthz = healthz
+	}
+}
+
+func WithEnableMetrics(enableMetrics bool) Option {
+	return func(s *Server) {
+		s.enableMetrics = enableMetrics
+	}
+}
+
+func WithEnableProfiling(enableProfiling bool) Option {
+	return func(s *Server) {
+		s.enableProfiling = enableProfiling
+	}
+}

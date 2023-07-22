@@ -2,10 +2,11 @@ package command
 
 import (
 	goflag "flag"
-	"fmt"
 	"strings"
 
 	"github.com/spf13/pflag"
+
+	"github.com/costa92/logger"
 )
 
 // WordSepNormalizeFunc changes all flags that contain "_" separators.
@@ -20,7 +21,7 @@ func WordSepNormalizeFunc(f *pflag.FlagSet, name string) pflag.NormalizedName {
 func WarnWordSepNormalizeFunc(f *pflag.FlagSet, name string) pflag.NormalizedName {
 	if strings.Contains(name, "_") {
 		nname := strings.ReplaceAll(name, "_", "-")
-		fmt.Sprintf("%s is DEPRECATED and will be removed in a future version. Use %s instead.", name, nname)
+		logger.Infof("%s is DEPRECATED and will be removed in a future version. Use %s instead.", name, nname)
 
 		return pflag.NormalizedName(nname)
 	}
@@ -36,6 +37,6 @@ func InitFlags(flags *pflag.FlagSet) {
 // PrintFlags logs the flags in the flagset.
 func PrintFlags(flags *pflag.FlagSet) {
 	flags.VisitAll(func(flag *pflag.Flag) {
-		fmt.Sprintf("FLAG: --%s=%q", flag.Name, flag.Value)
+		logger.Infof("FLAG: --%s=%q", flag.Name, flag.Value)
 	})
 }

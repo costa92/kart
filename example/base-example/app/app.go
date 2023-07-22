@@ -16,7 +16,7 @@ type App struct {
 
 func NewConfig() *kartHttp.HttpConfig {
 	return &kartHttp.HttpConfig{
-		Port:          "8080",
+		Port:          8080,
 		Healthz:       true,
 		EnableMetrics: true,
 		Name:          "kart",
