@@ -3,6 +3,7 @@ package app
 import (
 	"github.com/gin-gonic/gin"
 	"kart-io/kart/example/wire-example/config"
+	"kart-io/kart/example/wire-example/controller"
 	"kart-io/kart/example/wire-example/routers"
 	"kart-io/kart/transports"
 	kartHttp "kart-io/kart/transports/kart-http"
@@ -12,7 +13,11 @@ import (
 func Run(config *config.Config) error {
 	newServerConfig, _ := buildGenericConfig(config)
 	httpServer := newServerConfig.Complete().New()
-	routers.InitRoute(httpServer.GinEngin)
+
+	// 实例化控制器
+	apiCtr := controller.ProvideApiController()
+
+	routers.InitRoute(httpServer.GinEngin, apiCtr)
 	// 实例化服务
 	gs := transports.NewGenericAPIServer(
 		transports.Server(
@@ -56,7 +61,7 @@ func RunV1(config *config.Config) error {
 		kartHttp.WithInsecureServingInfo(newServerConfig.InsecureServing),
 	)
 	// 添加路由
-	routers.InitRoute(httpServer.GinEngin)
+	routers.InitRoute(httpServer.GinEngin, nil)
 	// 实例化服务
 	gs := transports.NewGenericAPIServer(
 		transports.Server(
