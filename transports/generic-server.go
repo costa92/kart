@@ -33,20 +33,20 @@ type GenericAPIServer struct {
 
 // NewGenericAPIServer 实例化
 func NewGenericAPIServer(opts ...Option) *GenericAPIServer {
-	options := options{
+	opt := options{
 		ctx:           context.Background(),
 		sigs:          []os.Signal{syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGINT},
 		handleSignals: true,
 	}
-	options.id = ksuid.New().String()
+	opt.id = ksuid.New().String()
 	for _, o := range opts {
-		o(&options)
+		o(&opt)
 	}
-	ctx, cancel := context.WithCancel(options.ctx)
+	ctx, cancel := context.WithCancel(opt.ctx)
 	return &GenericAPIServer{
 		ctx:    ctx,
 		cancel: cancel,
-		opts:   options,
+		opts:   opt,
 	}
 }
 

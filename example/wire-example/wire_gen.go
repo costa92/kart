@@ -7,14 +7,14 @@
 package main
 
 import (
-	app2 "kart-io/kart/example/wire-example/app"
-	"kart-io/kart/internal/command"
+	"kart-io/kart/example/wire-example/app"
 )
 
 // Injectors from wire.go:
 
-func wireApp() (*command.App, func(), error) {
-	appApp := app2.NewConfig()
-	return appApp, func() {
+func wireApp() (*app.ApiServer, func(), error) {
+	options := app.NewOptionConfig()
+	apiServer := app.NewApiServer(options)
+	return apiServer, func() {
 	}, nil
 }

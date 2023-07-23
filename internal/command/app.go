@@ -127,11 +127,12 @@ func (a *App) runCommand(cmd *cobra.Command, args []string) error {
 }
 
 // Run is used to launch the application.
-func (a *App) Run() {
+func (a *App) Run() error {
 	if err := a.cmd.Execute(); err != nil {
-		logger.Infof("%v %v\n", color.RedString("Error:"), err)
-		os.Exit(1)
+		logger.Errorf("%v %v\n", color.RedString("Error:"), err)
+		return err
 	}
+	return nil
 }
 
 func printWorkingDir() {

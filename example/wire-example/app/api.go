@@ -14,25 +14,37 @@ others. The API Server services REST operations to do the api objects management
 Find more api server information at:
     https://github.com/costa92/kart`
 
-var ProviderHttpSeverSet = wire.NewSet(NewConfig)
+var ProviderApiServerSet = wire.NewSet(NewOptionConfig, NewApiServer)
 
-func NewConfig() *command.App {
-	opts := options.NewOptions()
+type ApiServer struct {
+	App *command.App
+}
+
+func NewApiServer(opts *options.Options) *ApiServer {
 	a := command.NewApp(
 		"kart",
-		// command.WithNoConfig(),
 		command.WithOptions(opts),
 		command.WithDescription(commandDesc),
 		command.WithRunFunc(run(opts)),
 	)
-	return a
+	return &ApiServer{
+		App: a,
+	}
+}
+
+func (a *ApiServer) Run() error {
+	return a.App.Run()
+}
+
+func NewOptionConfig() *options.Options {
+	return options.NewOptions()
 }
 
 func run(opts *options.Options) command.RunFunc {
 	return func(basename string) error {
 		cfg, err := config.CreateConfigFromOptions(opts)
 		if err != nil {
-			return err
+			return nil
 		}
 		return Run(cfg)
 	}

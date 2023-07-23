@@ -14,16 +14,17 @@ type App struct {
 	GenericAPIServer *transports.GenericAPIServer
 }
 
-func NewConfig() *kartHttp.HttpConfig {
-	return &kartHttp.HttpConfig{
-		Port:          8080,
+func NewConfig() *kartHttp.ServerConfig {
+	return &kartHttp.ServerConfig{
+		InsecureServing: &kartHttp.InsecureServingInfo{
+			Address: "0.0.0.0:8080",
+		},
 		Healthz:       true,
 		EnableMetrics: true,
-		Name:          "kart",
 	}
 }
 
-func NewHttpSever(config *kartHttp.HttpConfig, engine *gin.Engine) (*App, error) {
+func NewHttpSever(config *kartHttp.ServerConfig, engine *gin.Engine) (*App, error) {
 	gs, err := initSever(config, engine)
 	if err != nil {
 		return nil, err
@@ -33,11 +34,12 @@ func NewHttpSever(config *kartHttp.HttpConfig, engine *gin.Engine) (*App, error)
 	}, nil
 }
 
-func initSever(config *kartHttp.HttpConfig, handler *gin.Engine) (*transports.GenericAPIServer, error) {
+func initSever(config *kartHttp.ServerConfig, handler *gin.Engine) (*transports.GenericAPIServer, error) {
+
 	// 实例化 http 服务
 	httpServer := kartHttp.NewServer(
 		kartHttp.WithGinEngin(handler),
-		kartHttp.WithConfig(config),
+		kartHttp.WithInsecureServingInfo(config.InsecureServing),
 	)
 
 	grcConfig := &kart_grpc.GrpcConfig{

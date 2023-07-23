@@ -1,5 +1,10 @@
 package options
 
+import (
+	"github.com/gin-gonic/gin"
+	kartHttp "kart-io/kart/transports/kart-http"
+)
+
 type ServerRunOption struct {
 	Name        string   `json:"name" mapstructure:"name"`
 	Mode        string   `json:"mode"        mapstructure:"mode"`
@@ -8,5 +13,18 @@ type ServerRunOption struct {
 }
 
 func NewServerRunOption() *ServerRunOption {
-	return &ServerRunOption{}
+	return &ServerRunOption{
+		Name:        "kart",
+		Mode:        gin.ReleaseMode,
+		Healthz:     true,
+		Middlewares: []string{},
+	}
+}
+
+func (s *ServerRunOption) ApplyTo(c *kartHttp.ServerConfig) error {
+	c.Mode = s.Mode
+	c.Healthz = s.Healthz
+	c.Middlewares = s.Middlewares
+
+	return nil
 }

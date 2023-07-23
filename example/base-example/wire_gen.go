@@ -14,8 +14,8 @@ import (
 // Injectors from wire.go:
 
 func wireApp(engine *gin.Engine) (*app.App, func(), error) {
-	httpConfig := app.NewConfig()
-	appApp, err := app.NewHttpSever(httpConfig, engine)
+	serverConfig := app.NewConfig()
+	appApp, err := app.NewHttpSever(serverConfig, engine)
 	if err != nil {
 		return nil, nil, err
 	}

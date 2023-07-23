@@ -5,10 +5,11 @@ package main
 
 import (
 	"github.com/google/wire"
-	app2 "kart-io/kart/example/wire-example/app"
-	"kart-io/kart/internal/command"
+	"kart-io/kart/example/wire-example/app"
 )
 
-func wireApp() (*command.App, func(), error) {
-	panic(wire.Build(app2.ProviderHttpSeverSet))
+func wireApp() (*app.ApiServer, func(), error) {
+	panic(wire.Build(
+		app.ProviderApiServerSet,
+	))
 }

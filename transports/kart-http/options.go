@@ -6,12 +6,6 @@ import (
 
 type Option func(server *Server)
 
-func WithConfig(config *HttpConfig) Option {
-	return func(s *Server) {
-		s.Config = config
-	}
-}
-
 func WithGinEngin(engin *gin.Engine) Option {
 	return func(s *Server) {
 		s.GinEngin = engin
@@ -39,5 +33,11 @@ func WithEnableMetrics(enableMetrics bool) Option {
 func WithEnableProfiling(enableProfiling bool) Option {
 	return func(s *Server) {
 		s.enableProfiling = enableProfiling
+	}
+}
+
+func WithInsecureServingInfo(insecureServingInfo *InsecureServingInfo) Option {
+	return func(s *Server) {
+		s.InsecureServingInfo = insecureServingInfo
 	}
 }

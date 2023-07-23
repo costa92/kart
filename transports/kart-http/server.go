@@ -2,28 +2,23 @@ package kart_http
 
 import (
 	"context"
-	"fmt"
-	"log"
-	"net/http"
-	"time"
-
+	"github.com/costa92/errors"
+	"github.com/costa92/logger"
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 	ginprometheus "github.com/zsais/go-gin-prometheus"
 	"kart-io/kart/transports/kart-http/middlewares"
-
-	"github.com/costa92/errors"
-	"github.com/costa92/logger"
+	"net/http"
 )
 
 type Server struct {
-	Config          *HttpConfig
-	GinEngin        *gin.Engine
-	httpServer      *http.Server
-	middlewares     []string
-	healthz         bool
-	enableMetrics   bool
-	enableProfiling bool
+	GinEngin            *gin.Engine
+	httpServer          *http.Server
+	InsecureServingInfo *InsecureServingInfo
+	middlewares         []string
+	healthz             bool
+	enableMetrics       bool
+	enableProfiling     bool
 }
 
 func NewServer(opts ...Option) *Server {
@@ -50,10 +45,7 @@ func (s *Server) Setup() {
 }
 
 func (s *Server) InstallMiddlewares() {
-	if s.Config == nil {
-		return
-	}
-	for _, m := range s.Config.Middlewares {
+	for _, m := range s.middlewares {
 		mw, ok := middlewares.Middlewares[m]
 		if !ok {
 			continue
@@ -87,18 +79,18 @@ func (s *Server) Start(ctx context.Context) error {
 			logger.Errorw("appService recover err", "err", err)
 		}
 	}()
-	serverConfig := s.Config
+
 	s.httpServer = &http.Server{
-		Addr:           fmt.Sprintf(":%d", serverConfig.Port),
-		Handler:        s.GinEngin,
-		ReadTimeout:    time.Duration(serverConfig.ReadTimeout) * time.Second,
-		WriteTimeout:   time.Duration(serverConfig.WriteTimeout) * time.Second,
-		MaxHeaderBytes: 1 << 20,
+		Addr:    s.InsecureServingInfo.Address,
+		Handler: s.GinEngin,
+		//ReadTimeout:    10 * time.Second,
+		//WriteTimeout:   10 * time.Second,
+		//MaxHeaderBytes: 1 << 20,
 	}
-	logger.Infow("start run http server", "port", serverConfig.Port)
+	logger.Infow("start run http server", "address", s.InsecureServingInfo.Address)
 	if err := s.httpServer.ListenAndServe(); err != nil {
 		if !errors.Is(err, http.ErrServerClosed) { // 如果是关闭状态，不当异常处理
-			log.Print("start run failed server:", serverConfig.Port)
+			logger.Errorw("start run failed server:", "address", s.InsecureServingInfo.Address)
 			return err
 		}
 	}

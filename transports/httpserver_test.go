@@ -1,25 +1,24 @@
-package kart_http
+package transports
 
 import (
 	"context"
+	"kart-io/kart/transports/kart-http"
+	options2 "kart-io/kart/transports/options"
 	"testing"
-
-	"github.com/gin-gonic/gin"
 )
 
 type testKey struct{}
 
 func Test_GinNewServer(t *testing.T) {
-	handler := gin.Default()
-	config := &HttpConfig{
-		Port:          8080,
-		Healthz:       true,
-		EnableMetrics: true,
+
+	opts := options2.NewInsecureServingOptions()
+
+	config := kart_http.NewServerConfig()
+	err := opts.ApplyTo(config)
+	if err != nil {
+		return
 	}
-	src := NewServer(
-		WithGinEngin(handler),
-		WithConfig(config),
-	)
+	src := config.Complete().New()
 	if src == nil {
 		t.Error("Server is nil")
 	}

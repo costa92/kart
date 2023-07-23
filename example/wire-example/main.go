@@ -7,10 +7,22 @@ import (
 
 func main() {
 	rand.Seed(time.Now().UTC().UnixNano())
-	app, cleanup, err := wireApp()
+	apiServer, cleanup, err := wireApp()
 	if err != nil {
 		panic(err)
 	}
 	defer cleanup()
-	app.Run()
+
+	err = apiServer.Run()
+	if err != nil {
+		return
+	}
+	//
+	//chSig := make(chan os.Signal, 1)
+	//signal.Notify(chSig, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT)
+	//if err = app.Run(); err != nil {
+	//	chSig <- syscall.SIGTERM
+	//}
+	//logger.Infow("Server exiting")
+	//<-chSig
 }
