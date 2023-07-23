@@ -1,15 +1,15 @@
 package user
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/google/wire"
-	"net/http"
 )
 
 var ProvideUserAPISet = wire.NewSet(NewUserController)
 
-type UserController struct {
-}
+type UserController struct{}
 
 func NewUserController() *UserController {
 	return &UserController{}

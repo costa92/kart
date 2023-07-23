@@ -46,7 +46,10 @@ func main() {
 		command.WithDescription(commandDesc),
 		command.WithRunFunc(run(opts)),
 	)
-	a.Run()
+	err := a.Run()
+	if err != nil {
+		return
+	}
 }
 
 func run(opts *app.Options) command.RunFunc {

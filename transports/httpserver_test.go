@@ -2,15 +2,15 @@ package transports
 
 import (
 	"context"
+	"testing"
+
 	"kart-io/kart/transports/kart-http"
 	options2 "kart-io/kart/transports/options"
-	"testing"
 )
 
 type testKey struct{}
 
 func Test_GinNewServer(t *testing.T) {
-
 	opts := options2.NewInsecureServingOptions()
 
 	config := kart_http.NewServerConfig()

@@ -1,10 +1,10 @@
 package routers
 
 import (
-	"kart-io/kart/example/wire-example/controller"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"kart-io/kart/example/wire-example/controller"
 )
 
 func InitRoute(g *gin.Engine, ctr *controller.ApiController) {

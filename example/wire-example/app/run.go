@@ -5,6 +5,7 @@ import (
 	"kart-io/kart/example/wire-example/config"
 	"kart-io/kart/example/wire-example/controller"
 	"kart-io/kart/example/wire-example/routers"
+	"kart-io/kart/example/wire-example/service"
 	"kart-io/kart/transports"
 	kartHttp "kart-io/kart/transports/kart-http"
 )
@@ -14,6 +15,8 @@ func Run(config *config.Config) error {
 	newServerConfig, _ := buildGenericConfig(config)
 	httpServer := newServerConfig.Complete().New()
 
+	// 实例化
+	_ = service.NewBaseService()
 	// 实例化控制器
 	apiCtr := controller.ProvideApiController()
 

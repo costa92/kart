@@ -35,7 +35,6 @@ func NewHttpSever(config *kartHttp.ServerConfig, engine *gin.Engine) (*App, erro
 }
 
 func initSever(config *kartHttp.ServerConfig, handler *gin.Engine) (*transports.GenericAPIServer, error) {
-
 	// 实例化 http 服务
 	httpServer := kartHttp.NewServer(
 		kartHttp.WithGinEngin(handler),
