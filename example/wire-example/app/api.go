@@ -2,9 +2,9 @@ package app
 
 import (
 	"github.com/google/wire"
-	"kart-io/kart/example/wire-example/config"
-	"kart-io/kart/example/wire-example/options"
-	"kart-io/kart/internal/command"
+	"github.com/kart-io/kart/example/wire-example/config"
+	"github.com/kart-io/kart/example/wire-example/options"
+	"github.com/kart-io/kart/internal/command"
 )
 
 const commandDesc = `The Kart API server validates and configures data

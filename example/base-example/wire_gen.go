@@ -8,7 +8,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"kart-io/kart/example/base-example/app"
+	"github.com/kart-io/kart/example/base-example/app"
 )
 
 // Injectors from wire.go:

@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	"kart-io/kart/transports/kart-http"
-	options2 "kart-io/kart/transports/options"
+	"github.com/kart-io/kart/transports/kart-http"
+	options2 "github.com/kart-io/kart/transports/options"
 )
 
 type testKey struct{}

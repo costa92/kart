@@ -1,4 +1,4 @@
-module kart-io/kart
+module github.com/kart-io/kart
 
 go 1.19
 

@@ -1,6 +1,6 @@
 package controller
 
-import "kart-io/kart/example/wire-example/controller/v1/user"
+import "github.com/kart-io/kart/example/wire-example/controller/v1/user"
 
 type ApiController struct {
 	UserController *user.UserController

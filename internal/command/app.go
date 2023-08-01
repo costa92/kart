@@ -4,9 +4,9 @@ import (
 	"os"
 
 	"github.com/fatih/color"
+	"github.com/kart-io/kart/pkg/cliflag"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"kart-io/kart/pkg/cliflag"
 
 	"github.com/costa92/logger"
 )

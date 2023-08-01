@@ -6,8 +6,8 @@ import (
 
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
+	"github.com/kart-io/kart/transports/kart-http/middlewares"
 	ginprometheus "github.com/zsais/go-gin-prometheus"
-	"kart-io/kart/transports/kart-http/middlewares"
 
 	"github.com/costa92/errors"
 	"github.com/costa92/logger"

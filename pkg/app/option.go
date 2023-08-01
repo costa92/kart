@@ -1,6 +1,6 @@
 package app
 
-import "kart-io/kart/pkg/cliflag"
+import "github.com/kart-io/kart/pkg/cliflag"
 
 type Options struct{}
 

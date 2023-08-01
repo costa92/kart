@@ -4,7 +4,7 @@ import (
 	"net"
 	"strconv"
 
-	kartHttp "kart-io/kart/transports/kart-http"
+	kartHttp "github.com/kart-io/kart/transports/kart-http"
 )
 
 type InsecureServingOptions struct {

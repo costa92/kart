@@ -2,12 +2,12 @@ package app
 
 import (
 	"github.com/gin-gonic/gin"
-	"kart-io/kart/example/wire-example/config"
-	"kart-io/kart/example/wire-example/controller"
-	"kart-io/kart/example/wire-example/routers"
-	"kart-io/kart/example/wire-example/service"
-	"kart-io/kart/transports"
-	kartHttp "kart-io/kart/transports/kart-http"
+	"github.com/kart-io/kart/example/wire-example/config"
+	"github.com/kart-io/kart/example/wire-example/controller"
+	"github.com/kart-io/kart/example/wire-example/routers"
+	"github.com/kart-io/kart/example/wire-example/service"
+	"github.com/kart-io/kart/transports"
+	kartHttp "github.com/kart-io/kart/transports/kart-http"
 )
 
 // Run 通过 Complete 函数完成

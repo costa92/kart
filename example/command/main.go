@@ -18,9 +18,9 @@ package main
 import (
 	"fmt"
 
-	"kart-io/kart/internal/command"
-	"kart-io/kart/internal/config"
-	"kart-io/kart/pkg/app"
+	"github.com/kart-io/kart/internal/command"
+	"github.com/kart-io/kart/internal/config"
+	"github.com/kart-io/kart/pkg/app"
 )
 
 type Config struct {

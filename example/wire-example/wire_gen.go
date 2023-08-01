@@ -7,7 +7,7 @@
 package main
 
 import (
-	"kart-io/kart/example/wire-example/app"
+	"github.com/kart-io/kart/example/wire-example/app"
 )
 
 // Injectors from wire.go:

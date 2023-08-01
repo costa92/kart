@@ -12,6 +12,7 @@ import (
 	grpczap "github.com/grpc-ecosystem/go-grpc-middleware/providers/zap/v2"
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/logging"
 	grpcRecovery "github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/recovery"
+	"github.com/kart-io/kart/internal/host"
 	"github.com/prometheus/client_golang/prometheus"
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"google.golang.org/grpc"
@@ -20,7 +21,6 @@ import (
 	"google.golang.org/grpc/health/grpc_health_v1"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/reflection"
-	"kart-io/kart/internal/host"
 
 	"github.com/costa92/logger"
 )

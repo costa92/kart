@@ -5,7 +5,7 @@ package main
 
 import (
 	"github.com/google/wire"
-	"kart-io/kart/example/wire-example/app"
+	"github.com/kart-io/kart/example/wire-example/app"
 )
 
 func wireApp() (*app.ApiServer, func(), error) {

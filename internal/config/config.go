@@ -1,7 +1,7 @@
 package config
 
 import (
-	"kart-io/kart/pkg/app"
+	"github.com/kart-io/kart/pkg/app"
 )
 
 type Config struct {

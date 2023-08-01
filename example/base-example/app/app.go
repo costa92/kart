@@ -3,9 +3,9 @@ package app
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/wire"
-	"kart-io/kart/transports"
-	kart_grpc "kart-io/kart/transports/kart-grpc"
-	kartHttp "kart-io/kart/transports/kart-http"
+	"github.com/kart-io/kart/transports"
+	kart_grpc "github.com/kart-io/kart/transports/kart-grpc"
+	kartHttp "github.com/kart-io/kart/transports/kart-http"
 )
 
 var ProviderHttpSeverSet = wire.NewSet(NewConfig, NewHttpSever)

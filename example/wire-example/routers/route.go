@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"kart-io/kart/example/wire-example/controller"
+	"github.com/kart-io/kart/example/wire-example/controller"
 )
 
 func InitRoute(g *gin.Engine, ctr *controller.ApiController) {

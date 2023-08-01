@@ -1,8 +1,8 @@
 package options
 
 import (
-	"kart-io/kart/pkg/cliflag"
-	"kart-io/kart/transports/options"
+	"github.com/kart-io/kart/pkg/cliflag"
+	"github.com/kart-io/kart/transports/options"
 )
 
 type Options struct {

@@ -7,10 +7,10 @@ import (
 	"sync"
 	"syscall"
 
+	"github.com/kart-io/kart"
 	"github.com/segmentio/ksuid"
 	"go.uber.org/automaxprocs/maxprocs"
 	"golang.org/x/sync/errgroup"
-	"kart-io/kart"
 
 	"github.com/costa92/errors"
 	"github.com/costa92/logger"

@@ -1,7 +1,7 @@
 package config
 
 import (
-	"kart-io/kart/example/wire-example/options"
+	"github.com/kart-io/kart/example/wire-example/options"
 )
 
 type Config struct {

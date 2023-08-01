@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"kart-io/kart/internal/host"
+	"github.com/kart-io/kart/internal/host"
 )
 
 type testKey struct{}

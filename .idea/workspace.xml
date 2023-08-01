@@ -1,26 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
+    <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f5dce38-0712-4ad4-a10e-652bf79645e4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/example/cmd/app/command.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/cmd/app/command_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/cmd/app/flag.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/cmd/app/help.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/cmd/app/options.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/cmd/cflag/sectioned.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/cmd/config/config.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/cmd/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/cmd/pkg/app.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/cmd/pkg/option.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/cmd/flags.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmd/kart/internal/run/run.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmd/kart/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmd/kart/version/version.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/base-example/app/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/base-example/app/app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/base-example/wire.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/base-example/wire.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/base-example/wire_gen.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/base-example/wire_gen.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/command/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/command/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/cmd/cmd.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/cmd/cmd.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/cmd/root.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/cmd/root.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/cmd/sectioned.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/cmd/sectioned.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/wire-example/app/api.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/wire-example/app/api.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/wire-example/app/run.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/wire-example/app/run.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/wire-example/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/wire-example/config/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/wire-example/controller/api_controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/wire-example/controller/api_controller.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/wire-example/options/options.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/wire-example/options/options.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/wire-example/routers/route.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/wire-example/routers/route.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/wire-example/wire.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/wire-example/wire.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/wire-example/wire_gen.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/wire-example/wire_gen.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/command/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/command/app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/command/options.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/command/options.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/config/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/app/option.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/app/option.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transports/generic-server.go" beforeDir="false" afterPath="$PROJECT_DIR$/transports/generic-server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transports/httpserver_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/transports/httpserver_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transports/kart-grpc/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/transports/kart-grpc/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transports/kart-grpc/server_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/transports/kart-grpc/server_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transports/kart-http/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/transports/kart-http/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transports/options/insecure_serving.go" beforeDir="false" afterPath="$PROJECT_DIR$/transports/options/insecure_serving.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transports/options/server_run_option.go" beforeDir="false" afterPath="$PROJECT_DIR$/transports/options/server_run_option.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,9 +46,17 @@
       </list>
     </option>
   </component>
+  <component name="GOROOT" url="file:///usr/local/go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="true" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2TNB9TXyYVpCvIS20J3q5jb4h4o" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -44,54 +64,57 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "DefaultGoTemplateProperty": "Go File",
-    "last_opened_file_path": "/home/hellotalk/code/go/src/github.com/marmotedu/iam"
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "configurable..is.expanded": "false",
+    "configurable.GoLibrariesConfigurable.is.expanded": "true",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "/home/hellotalk/code/go/src/github.com/marmotedu/iam",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "go.vgo"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cmd/kart/version" />
       <recent name="$PROJECT_DIR$/example/cmd/pkg" />
       <recent name="$PROJECT_DIR$/internal/cmd" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.Test_CobraCommand in kart-io/kart/example/cmd/app">
-    <configuration name="go build kart-io/kart/example/command" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager">
+    <configuration name="go build kart" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
       <module name="kart" />
       <working_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="kart-io/kart/example/command" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/example/command/main.go" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Test_CobraCommand in kart-io/kart/example/cmd/app" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="kart" />
-      <working_directory value="$PROJECT_DIR$/example/cmd/app" />
-      <root_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="kart-io/kart/example/cmd/app" />
+      <EXTENSION ID="software.aws.toolkits.jetbrains.core.execution.GoAwsConnectionRunConfigurationExtension">
+        <option name="credential" />
+        <option name="region" />
+        <option name="useCurrentConnection" value="false" />
+      </EXTENSION>
+      <kind value="FILE" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <pattern value="^\QTest_CobraCommand\E$" />
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Go Test.Test_CobraCommand in kart-io/kart/example/cmd/app" />
-        <item itemvalue="Go Build.go build kart-io/kart/example/command" />
-      </list>
-    </recent_temporary>
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/cmd/cmd.go</url>
-          <line>85</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VgoProject">
+    <environment>
+      <map>
+        <entry key="GO111MODULE" value="on" />
+      </map>
+    </environment>
+    <settings-migrated>true</settings-migrated>
   </component>
 </project>
