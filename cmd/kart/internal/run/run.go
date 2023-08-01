@@ -2,21 +2,29 @@ package run
 
 import (
 	"fmt"
-	"github.com/AlecAivazis/survey/v2"
-	"github.com/spf13/cobra"
-
 	"os"
 	"os/exec"
+	"path/filepath"
 	"strings"
+
+	"github.com/AlecAivazis/survey/v2"
+	"github.com/spf13/cobra"
 )
 
+// CmdRun run project command.
 var CmdRun = &cobra.Command{
 	Use:   "run",
-	Short: "Run a command",
-	Long:  "Run a command",
+	Short: "Run project",
+	Long:  "Run project. Example: kratos run",
 	Run:   Run,
 }
+var targetDir string
 
+func init() {
+	CmdRun.Flags().StringVarP(&targetDir, "work", "w", "", "target working directory")
+}
+
+// Run project.
 func Run(cmd *cobra.Command, args []string) {
 	var dir string
 	cmdArgs, programArgs := splitArgs(cmd, args)
@@ -29,6 +37,7 @@ func Run(cmd *cobra.Command, args []string) {
 		return
 	}
 	if dir == "" {
+		// find the directory containing the cmd/*
 		cmdPath, err := findCMD(base)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "\033[31mERROR: %s\033[m\n", err)
@@ -63,12 +72,12 @@ func Run(cmd *cobra.Command, args []string) {
 	fd.Stdout = os.Stdout
 	fd.Stderr = os.Stderr
 	fd.Dir = dir
-
+	fmt.Println(dir)
+	changeWorkingDirectory(fd, targetDir)
 	if err := fd.Run(); err != nil {
 		fmt.Fprintf(os.Stderr, "\033[31mERROR: %s\033[m\n", err.Error())
 		return
 	}
-	fmt.Println(programArgs, dir)
 }
 
 func splitArgs(cmd *cobra.Command, args []string) (cmdArgs, programArgs []string) {
@@ -87,5 +96,51 @@ func findCMD(base string) (map[string]string, error) {
 	if !strings.HasSuffix(wd, "/") {
 		wd += "/"
 	}
+	var root bool
+	next := func(dir string) (map[string]string, error) {
+		cmdPath := make(map[string]string)
+		err := filepath.Walk(dir, func(walkPath string, info os.FileInfo, err error) error {
+			// multi level directory is not allowed under the cmdPath directory, so it is judged that the path ends with cmdPath.
+			if strings.HasSuffix(walkPath, "cmd") {
+				paths, err := os.ReadDir(walkPath)
+				if err != nil {
+					return err
+				}
+				for _, fileInfo := range paths {
+					if fileInfo.IsDir() {
+						abs := filepath.Join(walkPath, fileInfo.Name())
+						cmdPath[strings.TrimPrefix(abs, wd)] = abs
+					}
+				}
+				return nil
+			}
+			if info.Name() == "go.mod" {
+				root = true
+			}
+			return nil
+		})
+		return cmdPath, err
+	}
+	for i := 0; i < 5; i++ {
+		tmp := base
+		cmd, err := next(tmp)
+		if err != nil {
+			return nil, err
+		}
+		if len(cmd) > 0 {
+			return cmd, nil
+		}
+		if root {
+			break
+		}
+		_ = filepath.Join(base, "..")
+	}
 	return map[string]string{"": base}, nil
+}
+
+func changeWorkingDirectory(cmd *exec.Cmd, targetDir string) {
+	targetDir = strings.TrimSpace(targetDir)
+	if targetDir != "" {
+		cmd.Dir = targetDir
+	}
 }

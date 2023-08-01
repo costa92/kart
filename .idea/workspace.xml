@@ -5,34 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f5dce38-0712-4ad4-a10e-652bf79645e4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/cmd/kart/internal/run/run.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmd/kart/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmd/kart/version/version.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/base-example/app/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/base-example/app/app.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/base-example/wire.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/base-example/wire.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/base-example/wire_gen.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/base-example/wire_gen.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/command/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/command/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/wire-example/app/api.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/wire-example/app/api.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/wire-example/app/run.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/wire-example/app/run.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/wire-example/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/wire-example/config/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/wire-example/controller/api_controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/wire-example/controller/api_controller.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/wire-example/options/options.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/wire-example/options/options.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/wire-example/routers/route.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/wire-example/routers/route.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/wire-example/wire.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/wire-example/wire.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/wire-example/wire_gen.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/wire-example/wire_gen.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/command/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/command/app.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/command/options.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/command/options.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/config/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/app/option.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/app/option.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transports/generic-server.go" beforeDir="false" afterPath="$PROJECT_DIR$/transports/generic-server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transports/httpserver_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/transports/httpserver_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transports/kart-grpc/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/transports/kart-grpc/server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transports/kart-grpc/server_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/transports/kart-grpc/server_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transports/kart-http/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/transports/kart-http/server.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transports/options/insecure_serving.go" beforeDir="false" afterPath="$PROJECT_DIR$/transports/options/insecure_serving.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transports/options/server_run_option.go" beforeDir="false" afterPath="$PROJECT_DIR$/transports/options/server_run_option.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/kart/internal/run/run.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/kart/internal/run/run.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +30,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 6
+}]]></component>
   <component name="ProjectId" id="2TNB9TXyYVpCvIS20J3q5jb4h4o" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -70,13 +47,15 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.automatic.dependencies.download": "true",
     "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
     "WebServerToolWindowFactoryState": "false",
     "configurable..is.expanded": "false",
     "configurable.GoLibrariesConfigurable.is.expanded": "true",
+    "git-widget-placeholder": "master",
     "go.import.settings.migrated": "true",
     "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "/home/hellotalk/code/go/src/github.com/marmotedu/iam",
+    "last_opened_file_path": "/Users/costalong/code/go/src/github.com/costa92/kart",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
